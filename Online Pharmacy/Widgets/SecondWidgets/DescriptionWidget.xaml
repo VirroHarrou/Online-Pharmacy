@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid CornerRadius="10" Background="#19A33131" BorderThickness="3" BorderBrush="#716363">
+    <Grid Margin="10" CornerRadius="10" Background="#19A33131" BorderThickness="3" BorderBrush="#716363">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="1.5*"/>
@@ -15,27 +15,9 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="2" Grid.ColumnSpan="2" Content="Мастер отчетов" Width="350" Click="Button_Click"/>
-        <Grid Margin="10" CornerRadius="10" BorderBrush="#716363" BorderThickness="3" Background="#d9d9d9">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-        </Grid>
-        <Grid Margin="10" CornerRadius="10" Grid.Column="1" BorderBrush="#716363" BorderThickness="3" Background="#d9d9d9">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-        </Grid>
-        <Grid Margin="10" CornerRadius="10" Grid.ColumnSpan="2" Grid.Row="1" BorderBrush="#716363" BorderThickness="3" Background="#d9d9d9">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-        </Grid>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text=""/>
+        <Image x:Name="image" Source="/Assets/StoreLogo.scale-400.png" Margin="10"/>
+        <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" Text="Пример"/>
+        <TextBlock x:Name="sale" Grid.Row="2" Grid.Column="0" Text="Пример"/>
     </Grid>
 </Page>

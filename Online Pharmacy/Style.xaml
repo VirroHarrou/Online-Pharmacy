@@ -4,7 +4,7 @@
 
     <Style TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontFamily" Value="Inter"/>
         <Setter Property="Foreground" Value="#FF4B4B4B"/>
@@ -19,8 +19,18 @@
         <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="BorderBrush" Value="#716363"/>
         <Setter Property="Foreground" Value="#FF4B4B4B"/>
-        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="Padding" Value="10"/>
     </Style>
 
+    <Style TargetType="TextBox">
+        <Setter Property="Background" Value="#d9d9d9"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="BorderBrush" Value="#716363"/>
+        <Setter Property="Foreground" Value="#FF4B4B4B"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+    
 </ResourceDictionary>

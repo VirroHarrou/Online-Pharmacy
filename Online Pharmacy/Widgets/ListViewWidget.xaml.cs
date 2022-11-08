@@ -1,17 +1,9 @@
-﻿using System;
+﻿using Online_Pharmacy.Models;
+using Online_Pharmacy.Widgets.SecondWidgets;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +17,50 @@ namespace Online_Pharmacy.Widgets
         public ListViewWidget()
         {
             this.InitializeComponent();
+
+            UpdateList();
+            UpdateList("");
+
+            ViewList.ItemClick += ViewListItemClick;
+        }
+
+        private void ViewListItemClick(object sender, ItemClickEventArgs e)
+        {
+            Medicament med = sender as Medicament;
+            DescriptionWidget description;
+            
+        }
+
+        private List<Medicament> medicaments;
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateList(findText.Text);
+        }
+
+        private void UpdateList()
+        {
+            medicaments = new List<Medicament>();
+
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var medicaments = db.Medicaments.ToList();
+                foreach(Medicament medicament in medicaments)
+                {
+                    this.medicaments.Add(medicament);
+                }
+            }
+        }
+
+        private void UpdateList(string select)
+        {
+            foreach(Medicament medicament in medicaments)
+            {
+                if(medicament.Name.ToLower().IndexOf(select) != -1)
+                {
+                    ViewList.Items.Add(medicament);
+                }
+            }
         }
     }
 }

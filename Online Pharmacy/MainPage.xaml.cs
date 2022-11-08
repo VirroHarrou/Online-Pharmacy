@@ -28,13 +28,21 @@ namespace Online_Pharmacy
         private void CatalogTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             MainWidget.Navigate(typeof(ListViewWidget));
-            SecondWidget.Navigate(typeof(DescriptionWidget));
         }
 
         private void RecieptTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             MainWidget.Navigate(typeof(RecieptWidget));
-            SecondWidget.Navigate(typeof(RecipetDescriptionWidget));
+        }
+
+        private void StorageTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            MainWidget.Navigate(typeof(StorageMenuWidget));
+        }
+
+        public void SetSecindWidget()
+        {
+            SecondWidget.Navigate(typeof(Page));
         }
     }
 }

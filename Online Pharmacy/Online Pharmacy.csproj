@@ -142,6 +142,12 @@
     <Compile Include="Widgets\SecondWidgets\ReportWidget.xaml.cs">
       <DependentUpon>ReportWidget.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Widgets\SecondWidgets\StorageMenuWidget.xaml.cs">
+      <DependentUpon>StorageMenuWidget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\StorageWidget.xaml.cs">
+      <DependentUpon>StorageWidget.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -217,6 +223,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Widgets\SecondWidgets\ReportWidget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\SecondWidgets\StorageMenuWidget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\StorageWidget.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,10 +5,19 @@
     xmlns:local="using:Online_Pharmacy.Widgets.SecondWidgets"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
-    <Grid>
-
+    <Grid Margin="10" CornerRadius="10" Background="#19A33131" BorderThickness="3" BorderBrush="#716363">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image Source="Assets/StoreLogo.scale-400.png" Margin="10"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Пример"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Пример"/>
     </Grid>
 </Page>
