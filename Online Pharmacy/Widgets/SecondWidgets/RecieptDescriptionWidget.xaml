@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Online_Pharmacy.Widgets.SecondWidgets.RecipetDescriptionWidget"
+    x:Class="Online_Pharmacy.Widgets.SecondWidgets.RecieptDescriptionWidget"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Online_Pharmacy.Widgets.SecondWidgets"

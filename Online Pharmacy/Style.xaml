@@ -32,5 +32,14 @@
         <Setter Property="Foreground" Value="#FF4B4B4B"/>
         <Setter Property="FontSize" Value="18"/>
     </Style>
-    
+
+    <Style TargetType="ListViewItem">
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="BorderBrush" Value="#716363"/>
+        <Setter Property="Foreground" Value="#FF4B4B4B"/>
+        <Setter Property="Margin" Value="10"/>
+    </Style>
+
+    <CornerRadius x:Key="ListViewItemCornerRadius">10</CornerRadius>
+
 </ResourceDictionary>

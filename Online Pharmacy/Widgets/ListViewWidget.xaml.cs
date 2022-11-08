@@ -1,19 +1,19 @@
-﻿using Online_Pharmacy.Models;
+﻿using Online_Pharmacy.Classes;
+using Online_Pharmacy.Models;
 using Online_Pharmacy.Widgets.SecondWidgets;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
-
-// Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
+using Windows.UI.Xaml.Navigation;
 
 namespace Online_Pharmacy.Widgets
 {
-    /// <summary>
-    /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-    /// </summary>
     public sealed partial class ListViewWidget : Page
     {
+        private List<Medicament> medicaments;
+
+        DescriptionWidget description;
+
         public ListViewWidget()
         {
             this.InitializeComponent();
@@ -21,21 +21,21 @@ namespace Online_Pharmacy.Widgets
             UpdateList();
             UpdateList("");
 
-            ViewList.ItemClick += ViewListItemClick;
+            ViewList.SelectionChanged += ViewListItemClick;
         }
 
-        private void ViewListItemClick(object sender, ItemClickEventArgs e)
+        private void ViewListItemClick(object sender, SelectionChangedEventArgs e)
         {
-            Medicament med = sender as Medicament;
-            DescriptionWidget description;
-            
+            ListView lv = sender as ListView;
+            Medicament med = lv.SelectedItem as Medicament;
+            MedicamentSelect medicamentSelect = new MedicamentSelect();
+            description.MedicamentSelect_MedicamentChanged(med);
+            medicamentSelect.Select(med);
         }
-
-        private List<Medicament> medicaments;
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateList(findText.Text);
+            UpdateList(findText.Text.ToLower());
         }
 
         private void UpdateList()
@@ -54,6 +54,7 @@ namespace Online_Pharmacy.Widgets
 
         private void UpdateList(string select)
         {
+            ViewList.Items.Clear();
             foreach(Medicament medicament in medicaments)
             {
                 if(medicament.Name.ToLower().IndexOf(select) != -1)

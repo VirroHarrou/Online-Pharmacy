@@ -37,6 +37,6 @@
                 <TextBlock Text="Товароучет" Grid.Column="3" Tapped="StorageTapped"/>
             </Grid>
         </Grid>
-        <Frame Background="#d9d9d9" x:Name="SecondWidget" Grid.Row="1"/>
+        <Frame Background="#d9d9d9" x:FieldModifier="public" x:Name="SecondWidget" Grid.Row="1"/>
     </Grid>
 </Page>

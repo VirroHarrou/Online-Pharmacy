@@ -7,15 +7,30 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Margin="10" CornerRadius="10" Background="#19A33131" BorderThickness="3" BorderBrush="#716363">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="1.4*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <ListView Grid.Row="1" x:Name="ViewList"/>
-        <TextBox x:Name="findText" PlaceholderText="Поиск" Margin="15" TextChanged="TextBox_TextChanged"/>
+        <Button Grid.Row="2" Grid.ColumnSpan="2" Content="Редактировать" Click="ButtonUpdateClick"/>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Создать запись" Click="ButtonCreateClick"/>
+        <Grid Margin="10" CornerRadius="10" BorderBrush="#716363" BorderThickness="3" Background="#d9d9d9">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="characteristics" Grid.Row="0" Grid.Column="0" Text=""/>
+        </Grid>
+        <Grid Margin="10" CornerRadius="10" Grid.ColumnSpan="2" Grid.Row="1" BorderBrush="#716363" BorderThickness="3" Background="#d9d9d9">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="description" Grid.Row="0" Grid.Column="0" Text=""/>
+        </Grid>
+        
     </Grid>
 </Page>

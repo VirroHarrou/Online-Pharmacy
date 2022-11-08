@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Online_Pharmacy.Classes;
+using Online_Pharmacy.Models;
+using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -14,23 +16,26 @@ namespace Online_Pharmacy.Widgets.SecondWidgets
         public DescriptionWidget()
         {
             this.InitializeComponent();
+            //MedicamentSelect select = new MedicamentSelect();
+            //select.MedicamentChanged += MedicamentSelect_MedicamentChanged;
         }
 
-        public static string ImageSource;
-        public static string Description;
-        public static string Sale;
+        public void MedicamentSelect_MedicamentChanged(Medicament medicament)
+        {
+            UpdateDescription(medicament);
+        }
 
-        public void UpdateDescription()
+        public void UpdateDescription(Medicament medicament)
         {
             Image img = new Image();
             BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.UriSource = new Uri(img.BaseUri, ImageSource);
+            //bitmapImage.UriSource = new Uri(img.BaseUri, medicament.Name);
             img.Source = bitmapImage;
 
             image = img;
 
-            description.Text = Description;
-            sale.Text = Sale;
+            description.Text = medicament.Description;
+            sale.Text = medicament.Price.ToString();
         }
     }
 }

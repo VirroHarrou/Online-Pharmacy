@@ -11,6 +11,7 @@ namespace Online_Pharmacy
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -28,21 +29,19 @@ namespace Online_Pharmacy
         private void CatalogTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             MainWidget.Navigate(typeof(ListViewWidget));
+            SecondWidget.Navigate(typeof(DescriptionWidget));
         }
 
         private void RecieptTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             MainWidget.Navigate(typeof(RecieptWidget));
+            SecondWidget.Navigate(typeof(RecieptDescriptionWidget));
         }
 
         private void StorageTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            MainWidget.Navigate(typeof(StorageMenuWidget));
-        }
-
-        public void SetSecindWidget()
-        {
-            SecondWidget.Navigate(typeof(Page));
+            MainWidget.Navigate(typeof(StorageWidget));
+            SecondWidget.Navigate(typeof(StorageMenuWidget));
         }
     }
 }

@@ -119,6 +119,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\MedicamentSelect.cs" />
+    <Compile Include="Classes\RecieptSelect.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -136,8 +138,8 @@
     <Compile Include="Widgets\SecondWidgets\DescriptionWidget.xaml.cs">
       <DependentUpon>DescriptionWidget.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Widgets\SecondWidgets\RecipetDescriptionWidget.xaml.cs">
-      <DependentUpon>RecipetDescriptionWidget.xaml</DependentUpon>
+    <Compile Include="Widgets\SecondWidgets\RecieptDescriptionWidget.xaml.cs">
+      <DependentUpon>RecieptDescriptionWidget.xaml</DependentUpon>
     </Compile>
     <Compile Include="Widgets\SecondWidgets\ReportWidget.xaml.cs">
       <DependentUpon>ReportWidget.xaml</DependentUpon>
@@ -218,7 +220,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Widgets\SecondWidgets\RecipetDescriptionWidget.xaml">
+    <Page Include="Widgets\SecondWidgets\RecieptDescriptionWidget.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

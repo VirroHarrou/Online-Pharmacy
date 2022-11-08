@@ -20,9 +20,9 @@ namespace Online_Pharmacy.Widgets.SecondWidgets
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class RecipetDescriptionWidget : Page
+    public sealed partial class RecieptDescriptionWidget : Page
     {
-        public RecipetDescriptionWidget()
+        public RecieptDescriptionWidget()
         {
             this.InitializeComponent();
         }
