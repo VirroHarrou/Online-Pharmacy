@@ -1,5 +1,6 @@
 ﻿using Online_Pharmacy.Classes;
 using Online_Pharmacy.Models;
+using System.Linq;
 using Windows.UI.Xaml.Controls;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
@@ -11,7 +12,7 @@ namespace Online_Pharmacy.Widgets.SecondWidgets
     /// </summary>
     public sealed partial class StorageMenuWidget : Page
     {
-        MedicamentSelect ms = StorageWidget.medicamentSelect;
+        MedicamentSelect ms = App.medicamentSelect;
         public StorageMenuWidget()
         {
             this.InitializeComponent();
@@ -19,27 +20,33 @@ namespace Online_Pharmacy.Widgets.SecondWidgets
             ms.MedicamentChanged += MedicamentSelectMedicamentChanged;
         }
 
+        private int? Id = null;
+
         private void MedicamentSelectMedicamentChanged(Medicament medicament)
         {
-            
-            description.Text = medicament.Description;
-            characteristics.Text = "Наименование: " + medicament.Name + "\n Стоимость: " + medicament.Price;
+            Name.Text = medicament.Name;
+            Description.Text = medicament.Description;
+            Price.Text = medicament.Price.ToString();
+            Id = medicament.Id;
         }
 
         private void ButtonCreateClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Medicament medicament = new Medicament();
-            medicament.Name = "Бронхо-мунал";
-            medicament.Price = 584.00f;
-            medicament.Description = "Назначение: " + "лечение острых респираторных инфекций верхних дыхательных путей";
             ApplicationContext application = new ApplicationContext();
-            application.Add(medicament);
-            application.SaveChanges();
-        }
 
-        private void ButtonUpdateClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            
+            if (Id != null)
+                medicament = application.Medicaments.Where(p => p.Id == Id) as Medicament;
+
+            medicament.Name = Name.Text;
+            medicament.Description = "Назначение: " + Description.Text;
+
+            if (float.TryParse(Price.Text, out var number))
+                medicament.Price = float.Parse(Price.Text);
+
+            if (Id == null)
+                application.Add(medicament);
+            application.SaveChanges();
         }
     }
 }

@@ -12,8 +12,6 @@ namespace Online_Pharmacy.Widgets
     {
         private List<Medicament> medicaments;
 
-        DescriptionWidget description;
-
         public ListViewWidget()
         {
             this.InitializeComponent();
@@ -28,9 +26,8 @@ namespace Online_Pharmacy.Widgets
         {
             ListView lv = sender as ListView;
             Medicament med = lv.SelectedItem as Medicament;
-            MedicamentSelect medicamentSelect = new MedicamentSelect();
-            description.MedicamentSelect_MedicamentChanged(med);
-            medicamentSelect.Select(med);
+            if(med != null)
+                App.medicamentSelect.Select(med);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

@@ -1,5 +1,4 @@
-﻿using Online_Pharmacy.Classes;
-using Online_Pharmacy.Models;
+﻿using Online_Pharmacy.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
@@ -9,7 +8,6 @@ namespace Online_Pharmacy.Widgets
     public sealed partial class StorageWidget : Page
     {
         private List<Medicament> medicaments;
-        public static MedicamentSelect medicamentSelect;
 
         public StorageWidget()
         {
@@ -18,8 +16,7 @@ namespace Online_Pharmacy.Widgets
             UpdateList();
             UpdateList("");
 
-            medicamentSelect = new MedicamentSelect();
-            medicamentSelect.Select(new Medicament());
+            ViewList.SelectionChanged += ViewListItemClick;
         }
 
         private void findTextTextChanged(object sender, TextChangedEventArgs e)
@@ -27,11 +24,12 @@ namespace Online_Pharmacy.Widgets
             UpdateList(findText.Text.ToLower());
         }
 
-        private void ViewListItemClick(object sender, ItemClickEventArgs e)
+        private void ViewListItemClick(object sender, SelectionChangedEventArgs e)
         {
-            Medicament med = sender as Medicament;
-            
-            medicamentSelect.Select(med);
+            ListView lv = sender as ListView;
+            Medicament med = lv.SelectedItem as Medicament;
+            if (med != null)
+                App.medicamentSelect.Select(med);
         }
 
         private void UpdateList()
@@ -55,7 +53,7 @@ namespace Online_Pharmacy.Widgets
             {
                 if (medicament.Name.ToLower().IndexOf(select) != -1)
                 {
-                    ViewList.Items.Add(Name = medicament.Name);
+                    ViewList.Items.Add(medicament);
                 }
             }
         }

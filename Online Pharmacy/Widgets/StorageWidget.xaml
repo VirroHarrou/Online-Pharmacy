@@ -15,7 +15,19 @@
             <RowDefinition Height="0.1*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="1" x:Name="ViewList"/>
+        <ListView Grid.Row="1" x:Name="ViewList">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <TextBox x:Name="findText" PlaceholderText="Поиск" Margin="15" TextChanged="findTextTextChanged"/>
     </Grid>
 </Page>

@@ -16,8 +16,8 @@ namespace Online_Pharmacy.Widgets.SecondWidgets
         public DescriptionWidget()
         {
             this.InitializeComponent();
-            //MedicamentSelect select = new MedicamentSelect();
-            //select.MedicamentChanged += MedicamentSelect_MedicamentChanged;
+            MedicamentSelect select = App.medicamentSelect;
+            select.MedicamentChanged += MedicamentSelect_MedicamentChanged;
         }
 
         public void MedicamentSelect_MedicamentChanged(Medicament medicament)
@@ -35,7 +35,7 @@ namespace Online_Pharmacy.Widgets.SecondWidgets
             image = img;
 
             description.Text = medicament.Description;
-            sale.Text = medicament.Price.ToString();
+            sale.Text = String.Format("Стоимость: {0:C2}", medicament.Price);
         }
     }
 }
