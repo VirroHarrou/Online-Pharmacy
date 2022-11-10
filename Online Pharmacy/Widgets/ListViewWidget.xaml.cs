@@ -1,10 +1,7 @@
-﻿using Online_Pharmacy.Classes;
-using Online_Pharmacy.Models;
-using Online_Pharmacy.Widgets.SecondWidgets;
+﻿using Online_Pharmacy.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace Online_Pharmacy.Widgets
 {

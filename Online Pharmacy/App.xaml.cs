@@ -1,5 +1,7 @@
 ﻿using Online_Pharmacy.Classes;
+using Online_Pharmacy.Models;
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -14,6 +16,8 @@ namespace Online_Pharmacy
     sealed partial class App : Application
     {
         public static MedicamentSelect medicamentSelect = new MedicamentSelect();
+        public static List<Reciept> listRiciepts = new List<Reciept>();
+        public static RecieptSelect recieptSelect = new RecieptSelect();
 
         /// <summary>
         /// Инициализирует одноэлементный объект приложения. Это первая выполняемая строка разрабатываемого

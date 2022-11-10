@@ -23,6 +23,12 @@ namespace Online_Pharmacy.Widgets
             this.InitializeComponent();
 
             UpdateData();
+            canvas.Tapped += Canvas_Tapped;
+        }
+
+        private void Canvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            canvasDraw();
         }
 
         private List<Reciept> reciepts; 
@@ -30,19 +36,32 @@ namespace Online_Pharmacy.Widgets
         private void canvasDraw()
         {
 
-            double canvasHeight = canvas.Height;
-            double canvasWight = canvas.Width;
+            double canvasHeight = 700;
+            double canvasWight = 1000;
+            double MinHeight = canvasHeight - canvasHeight / 10;
 
             Line line = new Line();
             
             line.X1 = 0;
-            line.Y1 = canvasHeight / 10;
-            line.X2 = canvas.Width;
-            line.Y2 = canvasWight / 10;
+            line.Y1 = MinHeight;
+            line.X2 = canvasWight;
+            line.Y2 = MinHeight;
 
             line.StrokeThickness = 2;
+            line.Stroke = new SolidColorBrush(Color.FromArgb(255,36,36,36));
 
             canvas.Children.Add(line);
+
+            int max = 3000;
+            foreach (Reciept reciept in reciepts)
+            {
+                
+                Rectangle rectangle = new Rectangle();
+                rectangle.Height = (max / reciept.Sum) * 15;
+                rectangle.Width = 45;
+                rectangle.Fill = new SolidColorBrush(Color.FromArgb(255, 36, 36, 36));
+                canvas.Children.Add(rectangle);
+            }
         }
 
         private void UpdateData()
@@ -57,14 +76,6 @@ namespace Online_Pharmacy.Widgets
                     reciepts.Add(reciept);
                 }
             }
-            foreach (Reciept reciept in reciepts)
-            {
-                Console.WriteLine(reciept);
-            }
-        }
-
-        private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
             canvasDraw();
         }
     }

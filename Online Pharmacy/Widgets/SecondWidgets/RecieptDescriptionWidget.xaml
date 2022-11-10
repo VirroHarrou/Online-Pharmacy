@@ -10,14 +10,14 @@
     <Grid Margin="10" CornerRadius="10" Background="#19A33131" BorderThickness="3" BorderBrush="#716363">
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image Source="Assets/StoreLogo.scale-400.png" Margin="10"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Пример"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Пример"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" x:Name="PriceText" Margin="15"/>
+       
+        <Button Click="ButtonClick" x:Name="button" Grid.Row="2" Content="Произвести оплату" IsEnabled="False"/>
     </Grid>
 </Page>

@@ -5,10 +5,46 @@
     xmlns:local="using:Online_Pharmacy.Widgets"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Скидка" HorizontalAlignment="Right" Margin="20"/>
+            <TextBox x:Name="Sale" Grid.Column="1" Margin="5" TextChanged="SaleTextChanged"/>
+            <Button Grid.Column="2" Content="%" Padding="10,6" FontSize="18" FontWeight="Bold" Click="ButtonProcent_Click"/>
+            <Button Grid.Column="3" Content="₽" Padding="13,6" FontSize="18" FontWeight="Bold" Click="ButtonRubls_Click"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="findText" Grid.Row="1" PlaceholderText="Поиск" Margin="10" TextChanged="TextBox_TextChanged"/>
+        </Grid>
+        <ListView x:Name="ViewList" Grid.Row="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

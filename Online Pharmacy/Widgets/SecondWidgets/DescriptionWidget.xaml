@@ -17,7 +17,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Image x:Name="image" Source="/Assets/StoreLogo.scale-400.png" Margin="10"/>
-        <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" Text="Пример" TextWrapping="Wrap"/>
-        <TextBlock x:Name="sale" Grid.Row="2" Grid.Column="0" Text="Пример"/>
+        <TextBlock x:Name="description" Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Margin="10"/>
+        <TextBlock x:Name="sale" Grid.Row="2" Grid.Column="0"/>
     </Grid>
 </Page>

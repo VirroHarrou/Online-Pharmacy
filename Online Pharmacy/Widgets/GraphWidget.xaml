@@ -9,7 +9,7 @@
     Background="#d9d9d9">
 
     <Grid Margin="10" CornerRadius="10" BorderBrush="#716363" BorderThickness="3">
-        <Canvas x:Name="canvas" Tapped="Grid_Tapped">
+        <Canvas x:Name="canvas">
             
         </Canvas>
     </Grid>

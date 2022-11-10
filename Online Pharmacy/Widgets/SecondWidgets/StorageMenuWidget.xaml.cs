@@ -1,5 +1,6 @@
 ﻿using Online_Pharmacy.Classes;
 using Online_Pharmacy.Models;
+using System;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 
@@ -27,26 +28,35 @@ namespace Online_Pharmacy.Widgets.SecondWidgets
             Name.Text = medicament.Name;
             Description.Text = medicament.Description;
             Price.Text = medicament.Price.ToString();
+            Count.Text = medicament.Count.ToString();
             Id = medicament.Id;
         }
 
         private void ButtonCreateClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Medicament medicament = new Medicament();
-            ApplicationContext application = new ApplicationContext();
+            using (ApplicationContext application = new ApplicationContext())
+            {
 
-            if (Id != null)
-                medicament = application.Medicaments.Where(p => p.Id == Id) as Medicament;
+                if (Id != null)
+                {
+                    medicament = application.Medicaments.FirstOrDefault(p => p.Id == Id) as Medicament;
+                }
 
-            medicament.Name = Name.Text;
-            medicament.Description = "Назначение: " + Description.Text;
+                medicament.Name = Name.Text;
+                medicament.Description = "Назначение: " + Description.Text;
 
-            if (float.TryParse(Price.Text, out var number))
-                medicament.Price = float.Parse(Price.Text);
 
-            if (Id == null)
-                application.Add(medicament);
-            application.SaveChanges();
+                if (float.TryParse(Price.Text, out float number))
+                    medicament.Price = number;
+
+                if (float.TryParse(Count.Text, out float count))
+                    medicament.Count = Convert.ToInt32(count);
+
+                if (Id == null)
+                    application.Add(medicament);
+                application.SaveChanges();
+            }
         }
     }
 }
