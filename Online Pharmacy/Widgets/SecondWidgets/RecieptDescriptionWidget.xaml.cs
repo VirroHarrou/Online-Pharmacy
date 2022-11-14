@@ -1,5 +1,6 @@
 ﻿using Online_Pharmacy.Models;
 using System;
+using System.Linq;
 using Windows.UI.Xaml.Controls;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
@@ -36,18 +37,26 @@ namespace Online_Pharmacy.Widgets.SecondWidgets
             if(sum < 0)
                 sum = 0;
             PriceText.Text = string.Format("Общая стоимость: {0:c2}\nСкидка: {1:c2}\n\n\nКоличество товаров: {2}\n\n Итого: {3:c2}",
-                reciept.Sum, sale, reciept.MedicamentList.Count, sum);
+                reciept.Sum, sale, reciept.ConstraintList.Count, sum);
         }
 
         private void ButtonClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             using (ApplicationContext context = new ApplicationContext())
             {
+                Reciept item = context.Reciepts.FirstOrDefault(p => p.Id == reciept.Id);
                 reciept.Sum -= Sale;
-                if (reciept.Sum < 0)
-                    reciept.Sum = 0;
-                reciept.Date = DateTime.Now;
-                context.Reciepts.Add(reciept);
+                item.Sum = reciept.Sum;
+                if (item.Sum < 0)
+                    item.Sum = 0;
+                item.Date = DateTime.Now;
+                context.SaveChanges();
+                foreach (Constraint medicament in reciept.ConstraintList)
+                {
+                    medicament.Medicament.Count -= 1;
+                }
+                item.ConstraintList = reciept.ConstraintList;
+                context.SaveChanges();
                 App.recieptSelect.DeleteReciept(reciept);
                 button.IsEnabled = false;
             }

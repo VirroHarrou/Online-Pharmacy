@@ -3,6 +3,7 @@ using Online_Pharmacy.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -31,7 +32,7 @@ namespace Online_Pharmacy.Widgets
             canvasDraw();
         }
 
-        private List<Reciept> reciepts; 
+        private List<Reciept> ListReciepts; 
 
         private void canvasDraw()
         {
@@ -52,28 +53,53 @@ namespace Online_Pharmacy.Widgets
 
             canvas.Children.Add(line);
 
-            int max = 3000;
-            foreach (Reciept reciept in reciepts)
+            int max = 0;
+            int offset = 20;
+            float[] ArrData = new float[14];
+
+            for (int i = 0; i < ArrData.Length; i++)
             {
-                
-                Rectangle rectangle = new Rectangle();
-                rectangle.Height = (max / reciept.Sum) * 15;
-                rectangle.Width = 45;
-                rectangle.Fill = new SolidColorBrush(Color.FromArgb(255, 36, 36, 36));
-                canvas.Children.Add(rectangle);
+                foreach (Reciept reciept in ListReciepts)
+                {
+                    if(reciept.Date.Day > DateTime.Now.Day - i)
+                        continue;
+                    if (reciept.Date.Day < DateTime.Now.Day + i)
+                        continue; //возможно перепутал знаки
+                    ArrData[i] += reciept.Sum;
+                }
+                if (ArrData[i] > max)
+                    max = (int)ArrData[i];
             }
+
+            foreach(float f in ArrData)
+            {
+                Polyline polyline = new Polyline();
+                if (f != 0)
+                {
+                    polyline.Points.Add(new Point(0 + offset, MinHeight));
+                    polyline.Points.Add(new Point(0 + offset, max / f + 30));
+                    polyline.Points.Add(new Point(25 + offset, max / f + 30));
+                    polyline.Points.Add(new Point(25 + offset, MinHeight));
+                }
+
+                polyline.Fill = new SolidColorBrush(Color.FromArgb(255, 36, 36, 36));
+
+                canvas.Children.Add(polyline);
+                offset += 60;
+            }
+            
         }
 
         private void UpdateData()
         {
-            reciepts = new List<Reciept>();
+            ListReciepts = new List<Reciept>();
             using (ApplicationContext db = new ApplicationContext())
             {
                 var Reciepts = db.Reciepts.ToList();
                 foreach(Reciept reciept in Reciepts)
                 {
                     if(reciept.Date < DateTime.Now && reciept.Date > DateTime.Now.AddDays(-14))
-                    reciepts.Add(reciept);
+                    ListReciepts.Add(reciept);
                 }
             }
             canvasDraw();

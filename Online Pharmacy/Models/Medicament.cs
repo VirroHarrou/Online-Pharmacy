@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using Windows.ApplicationModel.Activation;
 
 namespace Online_Pharmacy.Models
 {
@@ -12,12 +11,22 @@ namespace Online_Pharmacy.Models
         public string Description { get; set; }
         public float Price { get; set; }
         public int Count { get; set; }
+
+        public List<Constraint> RecieptList { get; set; }
+    }
+
+    public class Constraint
+    {
+        public int Id { get; set; }
+
+        public Medicament Medicament { get; set; }
+        public Reciept Reciept { get; set; }
     }
 
     public class Reciept
     {
         public int Id { get; set; }
-        public List<Medicament> MedicamentList { get; set; }
+        public List<Constraint> ConstraintList { get; set; }
         public float Sum { get; set; } = 0;
         public DateTime Date { get; set; }
     }
@@ -26,6 +35,7 @@ namespace Online_Pharmacy.Models
     {
         public DbSet<Medicament> Medicaments { get; set; }
         public DbSet<Reciept> Reciepts { get; set; }
+        public DbSet<Constraint> Constraints { get; set; }
 
         public ApplicationContext()
         {
@@ -33,6 +43,6 @@ namespace Online_Pharmacy.Models
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseSqlite("Filename=OnlinePharmacy.db");
+            optionsBuilder.UseSqlite("Filename=OnlinePharmacyNew.db");
     }
 }

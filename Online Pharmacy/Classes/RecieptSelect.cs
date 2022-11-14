@@ -31,7 +31,7 @@ namespace Online_Pharmacy.Classes
 
         public void DeleteReciept(Reciept reciept)
         {
-            this.reciept.MedicamentList.Clear();
+            this.reciept.ConstraintList.Clear();
             recieptDeleted?.Invoke(reciept);
         }
     }

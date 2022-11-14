@@ -54,7 +54,28 @@ namespace Online_Pharmacy.Widgets
             ListView lv = sender as ListView;
             Medicament med = lv.SelectedItem as Medicament;
             if (med != null && findText.Text != "")
-                reciept.MedicamentList.Add(med);
+            {
+                ApplicationContext db = new ApplicationContext();
+                Constraint constraint = db.Constraints.FirstOrDefault(m => m.Medicament == med);
+                if(constraint == null)
+                {
+                    constraint = new Constraint();
+                    constraint.Medicament = med;
+                    constraint.Reciept = this.reciept;
+                }
+                Reciept reciept = db.Reciepts.FirstOrDefault(r => r.Id == this.reciept.Id);
+                if(reciept == null)
+                {
+                    reciept = this.reciept;
+                    db.Reciepts.Add(reciept);
+                    db.SaveChanges();
+                    var rec = db.Reciepts.FirstOrDefault(r => r.Date == this.reciept.Date);
+                    this.reciept = rec;
+                }
+                if(this.reciept.ConstraintList == null)
+                    this.reciept.ConstraintList = new List<Constraint>();
+                this.reciept.ConstraintList.Add(constraint);
+            }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -71,7 +92,7 @@ namespace Online_Pharmacy.Widgets
 
         private void UpdateList()
         {
-            reciept.MedicamentList = new List<Medicament>();
+            reciept.ConstraintList = new List<Constraint>();
 
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -104,10 +125,10 @@ namespace Online_Pharmacy.Widgets
         {
             ViewList.Items.Clear();
             reciept.Sum = 0;
-            foreach (Medicament medicament in reciept.MedicamentList)
+            foreach (Constraint constarint in reciept.ConstraintList)
             {
-                reciept.Sum += medicament.Price;
-                ViewList.Items.Add(medicament);
+                reciept.Sum += constarint.Medicament.Price;
+                ViewList.Items.Add(constarint.Medicament);
             }
             if (float.TryParse(Sale.Text, out float sale))
             {

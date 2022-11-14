@@ -1,19 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Online_Pharmacy.Models;
+﻿using Online_Pharmacy.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using Microsoft.Office.Interop.Excel;
+using Application = Microsoft.Office.Interop.Excel.Application;
+using System.IO;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,7 +17,7 @@ namespace Online_Pharmacy.Widgets.SecondWidgets
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class ReportWidget : Page
+    public sealed partial class ReportWidget : Windows.UI.Xaml.Controls.Page
     {
         List<Reciept> reciepts;
         float PriceStorage = 0;
@@ -72,7 +67,31 @@ namespace Online_Pharmacy.Widgets.SecondWidgets
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            ListToExcel(reciepts);
+        }
 
+        private void ListToExcel(List<Reciept> reciepts)
+        {
+            Application excelApp = new Application();
+
+            excelApp.Visible = true;
+            excelApp.Workbooks.Add();
+            _Worksheet workSheet = (_Worksheet)excelApp.ActiveSheet;
+            workSheet.Cells[1, "A"] = "Дата";
+            workSheet.Cells[1, "B"] = "Сумма";
+            workSheet.Cells[1, "C"] = "Количество лекарств";
+
+            string data = File.ReadAllText(@"data.txt", Encoding.Default);
+
+            int datas = Convert.ToInt32(data);
+            int row = 1;
+            foreach (Reciept c in reciepts)
+            {
+                row++;
+                workSheet.Cells[datas, "A"] = c.Date;
+                workSheet.Cells[datas, "B"] = c.Sum;
+                workSheet.Cells[datas, "C"] = c.ConstraintList.Count;
+            }
         }
     }
 }
